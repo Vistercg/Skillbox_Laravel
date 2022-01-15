@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Article;
+
+class HomeContoller extends Controller
+{
+    public function index()
+    {
+        $articles = Article::latest()->get();
+        return view('welcome', compact('articles'));
+    }
+
+    public function about()
+    {
+        return view('layout.about');
+    }
+}
