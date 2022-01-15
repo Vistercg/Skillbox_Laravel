@@ -14,4 +14,4 @@ Route::get('/contacts', [ContactController::class, 'index']);
 Route::post('/contacts', [ContactController::class, 'store']);
 Route::get('/admin/feedback', [AdminController::class, 'feedback']);
 Route::get('/about', [HomeContoller::class, 'about']);
-
+// тест
