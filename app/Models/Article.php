@@ -10,7 +10,7 @@ class Article extends Model
     use HasFactory;
 
     //public $fillable = ['title', 'body']; Указываем поля которые можно заполнять массивом
-    public $guarded = []; //Поля которые защищены от заполнения массивом
+    public $guarded = ['id']; //Поля которые защищены от заполнения массивом
 
     public function getRouteKeyName()
     {

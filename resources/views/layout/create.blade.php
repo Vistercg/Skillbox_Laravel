@@ -15,19 +15,22 @@
             <div class="mb-3">
                 <label for="inputSlug" class="form-label">Символьный код</label>
                 <input type="text" type="text" class="form-control" id="inputSlug"
-                       placeholder="Уникальный код" name="slug">
+                       placeholder="Уникальный код" name="slug" value="{{ old('slug') }}">
             </div>
             <div class="mb-3">
                 <label for="inputTitle" class="form-label">Название статьи</label>
-                <input type="text" class="form-control" id="inputTitle" placeholder="Введите название" name="title">
+                <input type="text" class="form-control" id="inputTitle" placeholder="Введите название" name="title"
+                       value="{{ old('title') }}">
             </div>
             <div class="mb-3">
                 <label for="inputShortBody" class="form-label">Краткое описание</label>
-                <input type="text" class="form-control" id="inputShortBody" placeholder="Введите описание" name="shortBody">
+                <input type="text" class="form-control" id="inputShortBody" placeholder="Введите описание"
+                       name="shortBody" value="{{ old('shortBody') }}">
             </div>
             <div class="mb-3">
                 <label for="inputBody" class="form-label">Детальное описание</label>
-                <textarea rows="3" class="form-control" id="inputBody" placeholder="Введите описание" name="body"></textarea>
+                <textarea rows="3" class="form-control" id="inputBody" placeholder="Введите описание"
+                          name="body">{{ old('body') }}</textarea>
             </div>
             <div class="mb-3 form-check">
                 <input type="checkbox" name="checkbox" class="form-check-input" id="exampleCheck1">
