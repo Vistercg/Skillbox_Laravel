@@ -19,11 +19,8 @@ class ArticlesController extends Controller
 
     public function store(FormArticles $articles)
     {
-
-        Article::create( $articles->validated());
-
+        Article::create($articles->validated());
         return redirect('/');
-
     }
 
     public function destroy(Article $article)
@@ -35,15 +32,11 @@ class ArticlesController extends Controller
     public function edit(Article $article)
     {
         return view('layout.edit', compact('article'));
-
     }
 
     public function update(FormArticles $articles, Article $article)
     {
-
         $article->update($articles->validated());
-
         return redirect('/');
-
     }
 }
