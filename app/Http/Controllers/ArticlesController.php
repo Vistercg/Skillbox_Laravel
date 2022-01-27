@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\FormArticles;
 use App\Models\Article;
+use App\Models\Step;
 
 class ArticlesController extends Controller
 {
@@ -17,7 +18,7 @@ class ArticlesController extends Controller
         return view('layout.show', compact('article'));
     }
 
-    public function store(FormArticles $articles)
+    public function store($stepId, FormArticles $articles)
     {
         Article::create($articles->validated());
         return redirect('/');
@@ -39,4 +40,5 @@ class ArticlesController extends Controller
         $article->update($articles->validated());
         return redirect('/');
     }
+
 }
