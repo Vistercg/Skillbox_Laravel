@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FormArticles;
 use App\Models\Article;
-
 
 class ArticlesController extends Controller
 {
@@ -17,23 +17,26 @@ class ArticlesController extends Controller
         return view('layout.show', compact('article'));
     }
 
-    public function store()
+    public function store(FormArticles $articles)
     {
-        $this->validate(request(), [
-            'slug' => 'required | regex:/[a-z][a-z0-9_-]/ | unique:articles',
-            'title' => 'required | min:5 | max: 100',
-            'shortBody' => 'required | max: 255',
-            'body' => 'required',
-            'checkbox' =>'accepted'
-        ]);
+        Article::create($articles->validated());
+        return redirect('/');
+    }
 
-        Article::create([
-            'slug' => request('slug'),
-            'title' => request('title'),
-            'shortbody' => request('shortBody'),
-            'body' => request('body')
-        ]);
+    public function destroy(Article $article)
+    {
+        $article->delete();
+        return redirect('/');
+    }
 
+    public function edit(Article $article)
+    {
+        return view('layout.edit', compact('article'));
+    }
+
+    public function update(FormArticles $articles, Article $article)
+    {
+        $article->update($articles->validated());
         return redirect('/');
     }
 }

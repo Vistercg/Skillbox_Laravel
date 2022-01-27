@@ -7,6 +7,8 @@
         </h3>
         {{$article->body}}
 
+        <a href="/articles/{{ $article->slug }}/edit">Изменить</a>
+
         <hr>
         <a href="/">На главную</a>
     </div>
