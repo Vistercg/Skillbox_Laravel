@@ -15,7 +15,7 @@ class CreateArticlesTable extends Migration
     {
         Schema::dropIfExists('articles');
         Schema::create('articles', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('slug')->unique();
             $table->string('title');
             $table->string('shortBody');

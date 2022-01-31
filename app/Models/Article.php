@@ -28,6 +28,11 @@ class Article extends Model
         return $this->hasMany(Step::class);
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
     public function addStep($attributes)
     {
         return $this->steps()->create($attributes);

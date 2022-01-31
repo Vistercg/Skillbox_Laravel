@@ -18,7 +18,7 @@ class ArticlesController extends Controller
         return view('layout.show', compact('article'));
     }
 
-    public function store($stepId, FormArticles $articles)
+    public function store(FormArticles $articles)
     {
         Article::create($articles->validated());
         return redirect('/');

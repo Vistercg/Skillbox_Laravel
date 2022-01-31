@@ -5,6 +5,9 @@
         <h3 class="pb-3 mb-4 font-italic border-bottom">
             {{$article->title}}
         </h3>
+
+        @include('layout.tags', ['tags' => $article->tags])
+
         {{$article->body}}
 
         @if($article->steps->isNotEmpty())

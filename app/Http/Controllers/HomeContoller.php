@@ -8,7 +8,7 @@ class HomeContoller extends Controller
 {
     public function index()
     {
-        $articles = Article::latest()->get();
+        $articles = Article::with('tags')->latest()->get();
         return view('welcome', compact('articles'));
     }
 
