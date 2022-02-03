@@ -30,7 +30,7 @@
 
         @yield('content')
 
-        <?php //  @include('layout.sidebar')?>
+          @include('layout.sidebar')
 
     </div>
 

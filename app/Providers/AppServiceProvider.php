@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Tag;
 use Illuminate\Support\ServiceProvider;
 use Validator;
 
@@ -24,5 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        view()->composer('layout.sidebar', function ($view) {
+            $view->with('tagsCloud', Tag::tagsCloud());
+        });
     }
 }

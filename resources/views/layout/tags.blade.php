@@ -1,11 +1,11 @@
 @php
-    $articles = $articles ?? collect();
+    $tags = $tags ?? collect();
 @endphp
 
-@if($article->tags->isNotEmpty())
+@if($tags->isNotEmpty())
     <div>
-        @foreach($article->tags as $tag)
-            <a href="#" class="badge rounded-pill bg-secondary">{{ $tag->name }}</a>
+        @foreach($tags as $tag)
+            <a href="/tags/{{ $tag->getRouteKey() }}" class="badge rounded-pill bg-secondary">{{ $tag->name }}</a>
         @endforeach
     </div>
 @endif
