@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Tag;
+use App\Services\TagsSynchronizer;
 use Illuminate\Support\ServiceProvider;
 use Validator;
 
@@ -15,7 +16,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(TagsSynchronizer::class, function () {
+            return new TagsSynchronizer();
+        });
     }
 
     /**

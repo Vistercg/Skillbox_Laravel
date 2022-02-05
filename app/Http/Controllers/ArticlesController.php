@@ -6,6 +6,7 @@ use App\Http\Requests\FormArticles;
 use App\Models\Article;
 use App\Models\Step;
 use App\Models\Tag;
+use App\Services\TagsSynchronizer;
 
 class ArticlesController extends Controller
 {
@@ -19,9 +20,17 @@ class ArticlesController extends Controller
         return view('layout.show', compact('article'));
     }
 
-    public function store(FormArticles $articles)
+    public function store(FormArticles $articles, TagsSynchronizer $tagsSynchronizer)
     {
-        Article::create($articles->validated());
+
+        $model = Article::create($articles->validated());
+
+        $tags = collect(explode(',', request('tags')))->keyBy(function ($item) {
+            return $item;
+        });
+
+        $tagsSynchronizer->sync($tags, $model);
+
         return redirect('/');
     }
 
@@ -36,34 +45,16 @@ class ArticlesController extends Controller
         return view('layout.edit', compact('article'));
     }
 
-    public function update(FormArticles $articles, Article $article)
+    public function update(FormArticles $articles, Article $article, TagsSynchronizer $tagsSynchronizer)
     {
         $article->update($articles->validated());
 
-        $articleTags = $article->tags->keyBy('name');
-        $tags = collect(explode(',', request('tags')))->keyBy(function ($item) { return $item; });
+        $tags = collect(explode(',', request('tags')))->keyBy(function ($item) {
+            return $item;
+        });
 
-        $syncIds = $articleTags->intersectByKeys($tags)->pluck('id')->toArray();
-
-        $tagsToAttach = $tags->diffKeys($articleTags);
-//        $tagsToDetach = $articleTags->diffKeys($tags);
-//
-//        foreach ($tagsToAttach as $tag) {
-//            $tag = Tag::firstOrCreate(['name' => $tag]);
-//            $article->tags()->attach($tag);
-//        }
-//
-//        foreach ($tagsToDetach as $tag) {
-//            $article->tags()->detach($tag);
-//        }
-        foreach ($tagsToAttach as $tag) {
-            $tag = Tag::firstOrCreate(['name' => $tag]);
-            $syncIds[] = $tag->id;
-        }
-
-        $article->tags()->sync($syncIds);
+        $tagsSynchronizer->sync($tags, $article);
 
         return redirect('/');
     }
-
 }

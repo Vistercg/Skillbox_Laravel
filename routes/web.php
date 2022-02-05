@@ -25,8 +25,6 @@ Route::resource('/articles', ArticlesController::class)->parameters([
 
 Route::post('articles/{article:slug}/steps', [ArticlesStepsController::class, 'storeSteps']);
 Route::patch('/steps/{step}', [ArticlesStepsController::class, 'updateSteps']);
-
-
 Route::get('/contacts', [ContactController::class, 'index']);
 Route::post('/contacts', [ContactController::class, 'store']);
 Route::get('/admin/feedback', [AdminController::class, 'feedback']);
