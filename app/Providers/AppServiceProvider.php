@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Tag;
+use App\Services\TagsSynchronizer;
 use Illuminate\Support\ServiceProvider;
 use Validator;
 
@@ -14,7 +16,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(TagsSynchronizer::class, function () {
+            return new TagsSynchronizer();
+        });
     }
 
     /**
@@ -24,5 +28,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        view()->composer('layout.sidebar', function ($view) {
+            $view->with('tagsCloud', Tag::tagsCloud());
+        });
     }
 }

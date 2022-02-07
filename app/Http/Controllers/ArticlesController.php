@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\FormArticles;
 use App\Models\Article;
+use App\Models\Step;
+use App\Models\Tag;
+use App\Services\TagsSynchronizer;
 
 class ArticlesController extends Controller
 {
@@ -17,9 +20,14 @@ class ArticlesController extends Controller
         return view('layout.show', compact('article'));
     }
 
-    public function store(FormArticles $articles)
+    public function store(FormArticles $articles, TagsSynchronizer $tagsSynchronizer)
     {
-        Article::create($articles->validated());
+
+        $article = Article::create($articles->validated());
+        $tags = collect(explode(',', request('tags')))->keyBy(function ($item) {
+            return $item;
+        });
+        $tagsSynchronizer->sync($tags, $article);
         return redirect('/');
     }
 
@@ -34,9 +42,13 @@ class ArticlesController extends Controller
         return view('layout.edit', compact('article'));
     }
 
-    public function update(FormArticles $articles, Article $article)
+    public function update(FormArticles $articles, Article $article, TagsSynchronizer $tagsSynchronizer)
     {
         $article->update($articles->validated());
+        $tags = collect(explode(',', request('tags')))->keyBy(function ($item) {
+            return $item;
+        });
+        $tagsSynchronizer->sync($tags, $article);
         return redirect('/');
     }
 }

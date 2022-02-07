@@ -35,6 +35,11 @@
                 <textarea rows="3" class="form-control" id="inputBody"
                           name="body">{{ old('body', $article->body) }}</textarea>
             </div>
+            <div class="mb-3">
+                <label for="inputTags" class="form-label">Тэги</label>
+                <input type="text" class="form-control" id="inputTags" name="tags"
+                       value="{{ old('tags', $article->tags->pluck('name'))->implode(',') }}">
+            </div>
             <div class="mb-3 form-check">
                 <input type="checkbox" name="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Изменить</label>
