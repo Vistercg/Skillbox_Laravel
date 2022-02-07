@@ -20,9 +20,6 @@ class ArticlesStepsController extends Controller
     {
         $method = \request() -> has('completed') ? 'complete' : 'incomplete';
         $step->{$method}();
-
         return back();
     }
-
-
 }

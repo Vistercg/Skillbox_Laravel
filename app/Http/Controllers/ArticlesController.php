@@ -23,14 +23,11 @@ class ArticlesController extends Controller
     public function store(FormArticles $articles, TagsSynchronizer $tagsSynchronizer)
     {
 
-        $model = Article::create($articles->validated());
-
+        $article = Article::create($articles->validated());
         $tags = collect(explode(',', request('tags')))->keyBy(function ($item) {
             return $item;
         });
-
-        $tagsSynchronizer->sync($tags, $model);
-
+        $tagsSynchronizer->sync($tags, $article);
         return redirect('/');
     }
 
@@ -48,13 +45,10 @@ class ArticlesController extends Controller
     public function update(FormArticles $articles, Article $article, TagsSynchronizer $tagsSynchronizer)
     {
         $article->update($articles->validated());
-
         $tags = collect(explode(',', request('tags')))->keyBy(function ($item) {
             return $item;
         });
-
         $tagsSynchronizer->sync($tags, $article);
-
         return redirect('/');
     }
 }
