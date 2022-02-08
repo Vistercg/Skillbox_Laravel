@@ -4,10 +4,10 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticlesController;
 use App\Http\Controllers\ArticlesStepsController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\HomeContoller;
+use App\Http\Controllers\HomeControlled;
 use App\Http\Controllers\TagsController;
 
-Route::get('/', [HomeContoller::class, 'index']);
+Route::get('/', [HomeControlled::class, 'index']);
 
 Route::get('/tags/{tag}', [TagsController::class, 'index']);
 
@@ -28,7 +28,8 @@ Route::patch('/steps/{step}', [ArticlesStepsController::class, 'updateSteps']);
 Route::get('/contacts', [ContactController::class, 'index']);
 Route::post('/contacts', [ContactController::class, 'store']);
 Route::get('/admin/feedback', [AdminController::class, 'feedback']);
-Route::get('/about', [HomeContoller::class, 'about']);
+Route::get('/about', [HomeControlled::class, 'about']);
 
+Auth::routes();
 
-
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
