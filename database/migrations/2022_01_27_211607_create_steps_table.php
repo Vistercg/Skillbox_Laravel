@@ -15,7 +15,7 @@ class CreateStepsTable extends Migration
     {
         Schema::create('steps', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger("article_id");
+            $table->integer("article_id")->unsigned();
             $table->string("description");
             $table->boolean("completed") ->default(false);
             $table->timestamps();

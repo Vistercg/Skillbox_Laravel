@@ -14,11 +14,13 @@ class CreateTagArticleTable extends Migration
     public function up()
     {
         Schema::create('article_tag', function (Blueprint $table) {
-            $table->integer('article_id')->unsigned();
-            $table->integer('tag_id')->unsigned();
+            $table->unsignedBigInteger('tag_id');
+            $table->foreign('tag_id')->references('id')
+                ->on('tags')->onDelete('cascade'); // вызывается каскадное удаление внутри таблицы;
+            $table->unsignedBigInteger('article_id');
+            $table->foreign('article_id')->references('id')
+                ->on('article')->onDelete('cascade'); // вызывается каскадное удаление внутри таблицы
             $table->primary(['article_id', 'tag_id']);
-            $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade'); // вызывается каскадное удаление внутри таблицы
-            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
         });
     }
 

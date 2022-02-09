@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -33,7 +34,8 @@ class FormArticles extends FormRequest
             'title' => 'required | min:5 | max: 100',
             'shortBody' => 'required | max: 255',
             'body' => 'required',
-            'checkbox' => 'accepted'
+            'checkbox' => 'accepted',
+            'owner_id' => 'required'
         ];
     }
 }
