@@ -12,6 +12,7 @@ class ArticlesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('can:update, article') ->except(['index', 'store', 'create']);
     }
 
     public function create()

@@ -18,11 +18,11 @@
                 </a>
                 @guest
                     @if (Route::has('login'))
-                        <a class="btn btn-sm btn-outline-secondary" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <a class="btn btn-sm btn-outline-secondary" href="{{ route('login') }}">Войти</a>
                     @endif
                     @if (Route::has('register'))
                         <a class="btn btn-sm btn-outline-secondary"
-                           href="{{ route('register') }}">{{ __('Register') }}</a>
+                           href="{{ route('register') }}">Регитсрация</a>
                     @endif
                 @else
                     <a id="navbarDropdown" class="btn btn-sm btn-outline-secondary" href="#" role="button"
