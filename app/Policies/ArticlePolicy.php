@@ -13,6 +13,6 @@ class ArticlePolicy
 
     public function update(User $user, Article $article)
     {
-        return $article->owner_id == $user->id || $user->isAdmin();
+        return $article->owner_id == $user->id;
     }
 }
