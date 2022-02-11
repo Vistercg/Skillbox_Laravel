@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\FormArticles;
 use App\Models\Article;
-use App\Models\Step;
-use App\Models\Tag;
 use App\Services\TagsSynchronizer;
+
 
 class ArticlesController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('can:update, article') ->except(['index', 'store', 'create']);
+    }
+
     public function create()
     {
         return view('layout.create');
@@ -22,7 +27,6 @@ class ArticlesController extends Controller
 
     public function store(FormArticles $articles, TagsSynchronizer $tagsSynchronizer)
     {
-
         $article = Article::create($articles->validated());
         $tags = collect(explode(',', request('tags')))->keyBy(function ($item) {
             return $item;

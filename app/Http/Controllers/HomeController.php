@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 
-class HomeContoller extends Controller
+class HomeController extends Controller
 {
     public function index()
     {
-        $articles = Article::with('tags')->latest()->get();
+        $articles = Article::where('owner_id', auth()->id())->with('tags')->latest()->get();
         return view('welcome', compact('articles'));
     }
 

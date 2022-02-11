@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStepsTable extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateStepsTable extends Migration
      */
     public function up()
     {
-        Schema::create('steps', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->integer("article_id")->unsigned();
-            $table->string("description");
-            $table->boolean("completed") ->default(false);
+            $table->string('name', 320);
+            $table->string('email', 320);
+            $table->string('remember_token', 100)->nullable();
+            $table->string('password', 64);
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateStepsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('steps');
+        Schema::dropIfExists('users');
     }
 }

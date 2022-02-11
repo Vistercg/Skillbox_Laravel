@@ -41,6 +41,7 @@
                 <input type="checkbox" name="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Опубликовано</label>
             </div>
+            <input type="hidden" name="owner_id" value="{{ Auth::user()->id }}">
             <button type="submit" class="btn btn-primary">Создать задачу</button>
         </form>
     </div>
